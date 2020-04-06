@@ -7,6 +7,7 @@ const reverseTableForeignKeys = (tableForeignKeys, dbName) =>
 		childDbName: foreignKey.schema_name,
 		childCollection: foreignKey.table,
 		childField: foreignKey.column,
+		relationshipType: 'Foreign Key'
 	}));
 
 module.exports = reverseTableForeignKeys;
