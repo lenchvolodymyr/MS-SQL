@@ -60,13 +60,22 @@ const getCollectionsRelationships = logger => async (dbConnectionClient) => {
 	return reverseTableForeignKeys(tableForeignKeys, dbName);
 };
 
+const getStandardDocumentByJsonSchema = (jsonSchema) => {
+	return Object.keys(jsonSchema.properties).reduce((result, key) => {
+		return {
+			...result,
+			[key]: ""
+		};
+	}, {});
+};
+
 const prepareViewJSON = (dbConnectionClient, dbName, viewName, schemaName) => async jsonSchema => {
 	const [viewInfo, viewColumnRelations] = await Promise.all([
 		await getViewTableInfo(dbConnectionClient, dbName, viewName, schemaName),
 		await getViewColumnRelations(dbConnectionClient, dbName, viewName, schemaName),
 	]);
 	return {
-		jsonSchema: changeViewPropertiesToReferences(jsonSchema, viewInfo, viewColumnRelations),
+		jsonSchema: JSON.stringify(changeViewPropertiesToReferences(jsonSchema, viewInfo, viewColumnRelations)),
 		name: viewName,
 		relatedTables: viewInfo.map((columnInfo => ({
 			tableName: columnInfo['ReferencedTableName'],
@@ -117,6 +126,9 @@ const reverseCollectionsToJSON = logger => async (dbConnectionClient, tablesInfo
 				)({ required: [], properties: {} });
 
 				const reorderedTableRows = reorderTableRows(tableRows, reverseEngineeringOptions.isFieldOrderAlphabetic);
+				const standardDoc = Array.isArray(reorderedTableRows) && reorderedTableRows.length
+					? reorderedTableRows
+					: reorderTableRows([getStandardDocumentByJsonSchema(jsonSchema)], reverseEngineeringOptions.isFieldOrderAlphabetic);
 				return {
 					collectionName: tableName,
 					dbName: schemaName,
@@ -127,7 +139,8 @@ const reverseCollectionsToJSON = logger => async (dbConnectionClient, tablesInfo
 							views: [],
 						}
 					),
-					standardDoc: reorderedTableRows,
+					standardDoc: standardDoc,
+					documentTemplate: standardDoc,
 					collectionDocs: reorderedTableRows,
 					documents: reorderedTableRows,
 					entityLevel: {
