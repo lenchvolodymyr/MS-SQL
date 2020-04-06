@@ -3,7 +3,8 @@
 	"parentType": "document",
 	"structureType": true,
 	"defaultValues": {
-		"subtype": "object"
+		"subtype": "object",
+		"properties": []
 	},
 	"subtypes": {
 		"object": {
