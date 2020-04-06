@@ -1596,6 +1596,7 @@ making sure that you maintain a proper JSON format.
 				"minValue": 0,
 				"maxValue": 7,
 				"step": 1,
+				"typeDecorator": true,
 				"dependency": {
 					"type": "or",
 					"values": [
