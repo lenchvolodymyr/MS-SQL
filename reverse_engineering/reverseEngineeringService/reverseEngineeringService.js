@@ -84,6 +84,19 @@ const prepareViewJSON = (dbConnectionClient, dbName, viewName, schemaName) => as
 	};
 };
 
+const cleanNull = doc => Object.entries(doc).filter(([ key, value ]) => value !== null).reduce((result, [key, value]) => ({
+	...result,
+	[key]: value,
+}), {});
+
+const cleanDocuments = (documents) => {
+	if (!Array.isArray(documents)) {
+		return documents;
+	}
+
+	return documents.map(cleanNull);
+}
+
 const reverseCollectionsToJSON = logger => async (dbConnectionClient, tablesInfo, reverseEngineeringOptions) => {
 	const dbName = dbConnectionClient.config.database;
 	const [
@@ -142,7 +155,7 @@ const reverseCollectionsToJSON = logger => async (dbConnectionClient, tablesInfo
 					standardDoc: standardDoc,
 					documentTemplate: standardDoc,
 					collectionDocs: reorderedTableRows,
-					documents: reorderedTableRows,
+					documents: cleanDocuments(reorderedTableRows),
 					entityLevel: {
 						Indxs: reverseTableIndexes(tableIndexes),
 						memory_optimized: databaseMemoryOptimizedTables.includes(tableName),
