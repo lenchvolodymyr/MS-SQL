@@ -16,6 +16,7 @@
 				"propertyKeyword": "description",
 				"shouldValidate": false,
 				"propertyTooltip": "comments",
+				"addTimestampButton": false,
 				"propertyType": "details",
 				"template": "textarea"
 			},
@@ -24,6 +25,7 @@
 				"propertyKeyword": "comments",
 				"shouldValidate": false,
 				"propertyTooltip": "remarks",
+				"addTimestampButton": true,
 				"propertyType": "details",
 				"template": "textarea"
 			},

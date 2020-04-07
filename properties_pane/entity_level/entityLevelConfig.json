@@ -122,6 +122,7 @@ making sure that you maintain a proper JSON format.
 				"propertyKeyword": "description",
 				"shouldValidate": false,
 				"propertyTooltip": "comments",
+				"addTimestampButton": false,
 				"propertyType": "details",
 				"template": "textarea"
 			},
@@ -149,6 +150,7 @@ making sure that you maintain a proper JSON format.
 				"propertyName": "Remarks",
 				"propertyKeyword": "comments",
 				"propertyTooltip": "remarks",
+				"addTimestampButton": true,
 				"propertyType": "details",
 				"template": "textarea",
 				"valueType": "string"
@@ -448,6 +450,7 @@ making sure that you maintain a proper JSON format.
 					"propertyName": "Comments",
 					"propertyKeyword": "indxComments",
 					"propertyTooltip": "comments",
+					"addTimestampButton": false,
 					"propertyType": "details",
 					"template": "textarea"
 				}
@@ -505,6 +508,7 @@ making sure that you maintain a proper JSON format.
 					"propertyName": "Comments",
 					"propertyKeyword": "constrComments",
 					"propertyTooltip": "comments",
+					"addTimestampButton": false,
 					"propertyType": "details",
 					"template": "textarea"
 				}
