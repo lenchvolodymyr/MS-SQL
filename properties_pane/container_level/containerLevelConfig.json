@@ -62,6 +62,7 @@ making sure that you maintain a proper JSON format.
 				"propertyKeyword": "description",
 				"shouldValidate": false,
 				"propertyTooltip": "comments",
+				"addTimestampButton": false,
 				"propertyType": "details",
 				"template": "textarea"
 			},
@@ -70,6 +71,7 @@ making sure that you maintain a proper JSON format.
 				"propertyKeyword": "comments",
 				"shouldValidate": false,
 				"propertyTooltip": "remarks",
+				"addTimestampButton": true,
 				"propertyType": "details",
 				"template": "textarea"
 			},
